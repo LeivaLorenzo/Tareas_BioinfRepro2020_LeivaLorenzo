@@ -1,0 +1,21 @@
+###script "Tarea1_3.sh" Lorenzo Leiva 2020/01/17
+
+#!/bin/bash
+
+#to make a directory call "Arabidopsis"
+rm -rf Arabidopsis
+mkdir -p Arabidopsis
+
+for i in 948682 948481 947343 945811 948061;do
+
+#to download 5 mRNA sequences (NCBI) of Arabidopsis
+curl -s https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db\=nucleotide\&rettype\=fasta\&id\=$i > Arabidopsis/Temporal$i.fasta
+
+#to count TGCA
+grep ">" Arabidopsis/Temporal$i.fasta
+echo "counts of TGCA ="
+grep -o TGCA  Arabidopsis/Temporal$i.fasta | wc -l ;done
+
+#make final file
+cat Arabidopsis/*.fasta > Arabidopsis/Arabidopsis_mRNAseq.fasta
+rm -f Arabidopsis/Temporal*.fasta
