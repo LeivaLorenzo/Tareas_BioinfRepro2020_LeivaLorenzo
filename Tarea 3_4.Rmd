@@ -1,0 +1,51 @@
+---
+title: "Tarea 3.4"
+author: "Lorenzo Leiva Araya"
+date: "27-01-2020"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+## Script para Tarea 3.4 usando R Markdown
+
+Indicaciones para la tarea:
+
+1) Hacer un script a partir de los datos guardados en PracUni3/ejemplosgenerales/data/reads.txt
+   Usar rutas relativas desde donde esta ubicado el script (en general, en bin) !!
+   
+2) Hacer un barplot de reads por muestra
+
+3) Poner titulos al grafico y a cada eje
+
+4) Colorear cada libreria cambiando la paleta de colores, usando su alma de data artistas
+
+5) Escribir el script usando Rmarkdown y guardarlo en html (knit)
+
+6) Subir los archivos Rmarkdown y .html a su repo de Github
+
+7) Mandar el link del archivo html para completar la tarea
+
+## Script
+
+```{r}
+# Llamar datos
+reads<-read.delim("../data/reads.txt")
+# Revisar datos
+head(reads)
+
+# Definir colores
+palette(c("forestgreen", "dodgerblue", "firebrick"))          
+
+#Generar Gráfico
+barplot(reads$nreads, col=reads$Library,
+        xlab= "Sample",                                       # Agregar eje X
+        ylab= "number of reads",                              # Agregar eje Y
+        main = "Read of sequenciation")                       # Agregar título
+
+# Agregar leyenda
+legend(x="topleft", legend=levels(reads$Library), fill=palette()[1:3])
+
+```
+
